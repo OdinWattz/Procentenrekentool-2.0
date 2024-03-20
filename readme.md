@@ -57,4 +57,3 @@ Door deze tool te ontwikkelen wordt hopelijk het begrip van procenten vergroot e
     {doe niks}  
 2. als er 2 van de 3 gevuld zijn, moet het attribuut `disabled` van de Los op-knop verwijderd worden zodat de knop actief wordt. Vergelijkbaar moet de `class='is-invalid'` van een inputveld dat gevuld is, veranderen in `class='is-valid'`
 3. als de gebruiker vervolgens op de Los op-knop klikt, moet de waarde van de overgebleven variabele gevuld worden met het juiste antwoord
-4. 
