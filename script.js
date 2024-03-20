@@ -51,11 +51,29 @@ function solveProblem()
         nieuw.value = oud.value * ber_factor
     else if(nieuw.value != '' && soort.value != '' && percentage.value != '')
         oud.value = nieuw.value / ber_factor
-    else 
+    else {
         ber_factor = nieuw.value / oud.value
         factor.value = ber_factor
         deelfactor.value = ber_factor
-    
-
+        if(ber_factor > 1)
+        {
+            soort.value = 2
+            percentage.value = ((ber_factor - 1) * 100).toFixed(2)
+            soort.classList.remove("is-invalid")
+            percentage.classList.remove("is-invalid")
+        }
+        else {
+            soort.value = 3
+            percentage.value = ((1 - ber_factor) * 100).toFixed(2)
+            percentage.classList.remove("is-invalid")
+            soort.classList.remove("is-invalid")
+        }
+    }
+// alle input bevriezen na het berekenen behalve wat ik heb berekend
+    // oud.disabled = true
+    // nieuw.disabled = true
+    // soort.disabled = true
+    // percentage.disabled = true
+    // document.getElementById("losop_btn").disabled = true
 }
 
