@@ -1,3 +1,19 @@
+<?php
+include 'db/dbconnection.class.php';
+
+$db = new dbconnection();	
+$sql = "SELECT * FROM sommen";
+
+$query = $db->prepare($sql);
+$query->execute();
+$recset = $query -> fetchAll(PDO::FETCH_ASSOC);
+// checken of t werkt
+/*echo "<pre>";
+print_r($recset);
+echo "</pre>";*/
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +23,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
-    <div class="container">
+    <div class="container mt-4">
+      <div id="som">
+        <h5>Inleiding</h5>
+        <?php
+          echo $recset[0]['inleiding'];
+        ?>
+        <h5>vraag</h5>
+        <?php
+          echo $recset[0]['vraag'];
+        ?>
+        <h5>Antwoord</h5>
+        <?php
+          if($recset[0]['voor_achter'] == 0){
+            echo $recset[0]['eenheid']."<input class= 'form-control type=text'>";
+          }
+            else { echo $recset[0]['antwoord']." ".$recset[0]['eenheid'];}
+        ?>
+      </div>
         <div class="row">
             <div class="col-3">
                 <!-- linker card -->
