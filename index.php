@@ -68,10 +68,7 @@ echo "</pre>";
 
           </div>
         </div>
-
-
-
-       
+               
       </div>
         <div class="row">
             <div class="col-1"></div>
