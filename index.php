@@ -3,7 +3,7 @@ include "db/dbconnection.class.php";
 $dbconnect = new Dbconnection();
 //$dbconnect is een instantie van de Dbconnection-class
 //en bevat dus alles wat nodig is voor een werkende database-connectie
-$sql = "SELECT * FROM sommen WHERE categorie = 0";
+$sql = "SELECT * FROM sommen ORDER BY RAND() LIMIT 1";
 //standaard:
 $query = $dbconnect->prepare($sql);
 //standaard:
@@ -11,9 +11,9 @@ $query->execute();
 //standaard:
 $recset = $query->fetchAll(2);
 //slimmigheid: kijken wat de raw-output is
-echo "<pre>";
+/*echo "<pre>";
 print_r($recset);
-echo "</pre>";
+echo "</pre>";*/
 ?>
 
 <!doctype html>
@@ -38,7 +38,7 @@ echo "</pre>";
         <?= $recset[0]['vraag']; ?>
         <h5>Geef hier je antwoord</h5>
         <div class='row'>
-          <div class='col-2'>
+          <div class='col-3'>
         <?php
         if($recset[0]['voor_achter'] == 0){
           ?>
@@ -48,13 +48,17 @@ echo "</pre>";
             </div>
           
         <?php
-        } else {
-          "<input class='form-control' type='text'>".$recset[0]['eenheid'];
-        }
+        } else { 
+          ?>
+            <div class='input-group mb-3'>
+              <input id='answer' type='text' class='form-control'>
+              <span class='input-group-text'><?= $recset[0]['eenheid'] ?></span>
+            </div>
+        <?php }
         ?>
           </div>
           <div class='col-3'>
-            <button class="btn btn-success">Check antwoord</button>
+            <button class="btn btn-success" onclick="checkAnswer('<?= $recset[0]['antwoord'] ?>')">Check antwoord</button>
           </div>
         </div>
           </div>
@@ -68,7 +72,7 @@ echo "</pre>";
 
           </div>
         </div>
-               
+
       </div>
         <div class="row">
             <div class="col-1"></div>
