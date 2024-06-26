@@ -10,6 +10,8 @@ const losopknop = document.getElementById("losop_btn")
 const factor = document.getElementById("inp_factor")
 const deler = document.getElementById("inp_deler")
 
+const answer = document.getElementById("answer")
+
 let ber_factor
 
 function checkInput()
@@ -88,8 +90,16 @@ function solveProblem()
     }
     oud.disabled = true
     nieuw.disabled = true
+    //alert ("je kunt opnieuw beginnen door een re-load")
     soort.disabled = true
     perc.disabled = true
     losopknop.disabled = true
-    alert ("je kunt opnieuw beginnen door een re-load")
+}
+
+function checkAnswer(antwoord){
+    if(answer.value == antwoord){
+        alert("Antwoord is goed")
+    } else {
+        alert("Antwoord is fout")
+    }
 }

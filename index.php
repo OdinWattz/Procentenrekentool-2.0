@@ -3,7 +3,7 @@ include "db/dbconnection.class.php";
 $dbconnect = new Dbconnection();
 //$dbconnect is een instantie van de Dbconnection-class
 //en bevat dus alles wat nodig is voor een werkende database-connectie
-$sql = "SELECT * FROM sommen WHERE categorie = 0";
+$sql = "SELECT * FROM sommen ORDER BY RAND() LIMIT 1";
 //standaard:
 $query = $dbconnect->prepare($sql);
 //standaard:
@@ -11,9 +11,9 @@ $query->execute();
 //standaard:
 $recset = $query->fetchAll(2);
 //slimmigheid: kijken wat de raw-output is
-echo "<pre>";
+/*echo "<pre>";
 print_r($recset);
-echo "</pre>";
+echo "</pre>";*/
 ?>
 
 <!doctype html>
@@ -25,6 +25,41 @@ echo "</pre>";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
+    <!--Navigatiebar-->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Procentenrekentool
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/Rekenmachine/index.html">Rekenmachine</a></li>
+                                <li><a class="dropdown-item" href="/Game/index.html">Game</a></li>
+                                <li><a class="dropdown-item" href="/Tafelsoefenen/index.html">Tafelsoefenen</a></li>
+                                <li><a class="dropdown-item" href="/Tafels/index.html">Tafels tool</a></li>
+                                <li><a class="dropdown-item" href="/Rekenopdracht/index.html">Omrekenen</a></li>
+                                <li><a class="dropdown-item" href="/Sudoku/index.html">Sudoku</a></li>
+                                <li><a class="dropdown-item" href="/procentenrekentool/index.php">Procentenrekentool</a></li>
+                            </ul>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--Einde navigatie tab-->
     <div class="container">
       <div id="som">
         <div class="row">
@@ -38,7 +73,7 @@ echo "</pre>";
         <?= $recset[0]['vraag']; ?>
         <h5>Geef hier je antwoord</h5>
         <div class='row'>
-          <div class='col-2'>
+          <div class='col-3'>
         <?php
         if($recset[0]['voor_achter'] == 0){
           ?>
@@ -48,27 +83,31 @@ echo "</pre>";
             </div>
           
         <?php
-        } else {
-          "<input class='form-control' type='text'>".$recset[0]['eenheid'];
-        }
+        } else { 
+          ?>
+            <div class='input-group mb-3'>
+              <input id='answer' type='text' class='form-control'>
+              <span class='input-group-text'><?= $recset[0]['eenheid'] ?></span>
+            </div>
+        <?php }
         ?>
           </div>
           <div class='col-3'>
-            <button class="btn btn-success">Check antwoord</button>
+            <button class="btn btn-success" onclick="checkAnswer('<?= $recset[0]['antwoord'] ?>')">Check antwoord</button>
           </div>
         </div>
           </div>
           <div class="col-4">
             <?php 
               if($recset[0]['afbeelding'] != '')
-              echo "<img src='img/{$recset[0]['afbeelding']}' 
+              echo "<img src='{$recset[0]['afbeelding']}' 
                   alt='' style='height: 300px;' class='img-fluid'>";
             ?>
 
 
           </div>
         </div>
-               
+
       </div>
         <div class="row">
             <div class="col-1"></div>

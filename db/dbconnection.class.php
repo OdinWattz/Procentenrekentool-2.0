@@ -2,9 +2,9 @@
 class Dbconnection extends PDO
 {
     private $host = "localhost";
-    private $dbname = "rekenen";
-    private $user = "rekenuser";
-    private $pass = "XXtCZMSwpFmRYzc3";
+    private $dbname = "u935988077_rekenen";
+    private $user = "u935988077_rekenuser";
+    private $pass = "qY96+KS!:1=";
     public function __construct()
     {
         parent::__construct("mysql:host=".$this->host.";dbname=".$this->dbname."; charset=utf8", $this->user, $this->pass);
